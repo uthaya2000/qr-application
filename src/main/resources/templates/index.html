@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace = "header.html">
+</head>
+<body>
+    <div id="qr" class="card" style="width: 18rem;">
+      <input type="hidden" name="" id="refID", th:value="${refId}">
+      <form id="qr-form" th:action="@{${'/' + refId + '/redirect'}}" method="POST"></form>
+        <img th:src="${'data:image/png;base64,' + qrCode}" class="card-img-top" alt="QR">
+        <div class="card-body">
+          <p class="card-text">Scan the QR using google lens... <br\> QR will become invalid after 60 seconds</p>
+        </div>
+    </div>
+    <div th:replace = "footer.html"></div>
+</body>
+
+<script>
+  const refId = document.getElementById("refID").value;
+  
+  console.log('REF ID:',refId);
+
+  async function poll() {
+    const response = await fetch (`poll?id=${refId}`)
+    if (response.status == 404)
+      await setTimeout(poll, 1500);
+    else
+     document.getElementById("qr-form").submit();
+  }
+
+  poll();
+
+  setTimeout(() => {
+    document.getElementById("qr-form").submit();
+  }, 60000)
+
+
+</script>
+</html>

@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="header.html">
+</head>
+<body>
+    <div th:attr="class=${flag == 1} ? 'alert alert-success text-center' : 'alert alert-danger text-center'" role="alert">
+        <p th:text="${msg}"></p>
+    </div>
+    <div th:replace = "footer.html"></div>
+</body>
+</html>

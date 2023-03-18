@@ -1,0 +1,46 @@
+
+buildscript {
+	repositories { jcenter() }
+	dependencies {
+		classpath "org.springframework.boot:spring-boot-gradle-plugin:1.5.22.RELEASE"
+		classpath 'org.springframework:springloaded:1.2.6.RELEASE'
+	}
+}
+
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '2.7.9'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+}
+
+group = 'com.poc'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation group: 'com.google.zxing', name: 'core', version: '3.5.1'
+	implementation group: 'com.google.zxing', name: 'javase', version: '3.5.1'
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'redis.clients:jedis'
+	implementation 'org.apache.commons:commons-pool2'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
