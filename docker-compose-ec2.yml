@@ -1,0 +1,19 @@
+version: '3'
+services:
+  app:
+    image: uthaya10/qr-app:latest
+    links:
+      - redis
+    depends_on:
+      - redis
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    ports:
+      - "8051:8051"
+  redis:
+    container_name: redis
+    image: redis:7.0.9-alpine
+    hostname: redis
+    ports:
+      - "6379:6379"
