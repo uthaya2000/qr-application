@@ -20,7 +20,7 @@ Go to the project directory
   cd my-project
 ```
 
-Install dependencies
+Run in local?
 
 ```bash
   docker-compose up -d
